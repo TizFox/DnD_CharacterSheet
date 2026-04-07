@@ -1,7 +1,10 @@
 export const FILE_EXTENTION = ".dndchar";
 
-export function loadDndChar(event, onLoad) {
-	const file = event.target.files[0];
+function check(dndChar) {
+	// Check if a json character has all the variables
+}
+
+export function load(file, onLoad) {
 	const reader = new FileReader();
 
 	reader.onload = (e) => {
@@ -10,7 +13,7 @@ export function loadDndChar(event, onLoad) {
 	reader.readAsText(file);
 }
 
-export function saveDndChar(data, filename) {
+export function save(data, filename) {
 	const json = JSON.stringify(data, null, 2);
 	const blob = new Blob([json], { type: "application/json" });
 	const url = URL.createObjectURL(blob);

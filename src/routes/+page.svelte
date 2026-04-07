@@ -1,9 +1,19 @@
 <script>
 	const logo = "/logo.svg";
 
-	import { FILE_EXTENTION, loadDndChar, saveDndChar } from "$lib/fileHandler";
+	import { load, save } from "$lib/fileHandler";
+
+	import DndCharInput from "$lib/components/DndCharInput.svelte";
 
 	let dndCharFile = $state(null);
+
+	$effect(() => {
+		if (dndCharFile) {
+			console.log(dndCharFile);
+			console.log(dndCharFile.name);
+			console.log(dndCharFile.level);
+		}
+	});
 </script>
 
 <!------------------------------------------>
@@ -19,18 +29,22 @@
 
 <!------------------------------------------>
 
-<div>
-	<input
-		type="file"
-		accept={FILE_EXTENTION}
-		onchange={(e) => loadDndChar(e, (data) => (dndCharFile = data))}
+<section>
+	<DndCharInput
+		wClass="w-1/2"
+		placeholder="Character File"
+		onInput={(file) => load(file, (data) => (dndCharFile = data))}
 	/>
 	<button onclick={() => saveDndChar(dndCharFile)}>Save</button>
+</section>
 
-	<p>
-		{dndCharFile}
-	</p>
-</div>
+{#if dndCharFile}
+	<section>
+		<p>
+			{JSON.stringify(dndCharFile)}
+		</p>
+	</section>
+{/if}
 
 <!------------------------------------------>
 

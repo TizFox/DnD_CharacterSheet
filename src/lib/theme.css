@@ -1,3 +1,128 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@theme {
+	--main-size: 80dvh;
+	--bars-size: 10dvh;
+
+	--transition-std: all 200ms ease-in-out;
+
+	--color-disabled: var(--color-red-300);
+
+	/* Follow the z-index */
+	--color-dark: var(--color-slate-50);
+	--color-light: var(--color-slate-950);
+	--color-cta: var(--color-emerald-500);
+	--color-err: var(--color-red-600);
+
+	--color-d0: var(--color-slate-900);
+	--color-d1: var(--color-slate-700);
+	--color-d2: var(--color-slate-600);
+}
+
+@utility transition-* {
+	transition: --value(--transition-*);
+}
+
+@utility title-text {
+	@apply font-light text-2xl md:text-3xl;
+}
+@utility subtitle-text {
+	@apply font-light text-xl md:text-2xl;
+}
+@utility important-text {
+	@apply font-medium text-base md:text-lg;
+}
+@utility sm-important-text {
+	@apply font-medium text-sm md:text-base;
+}
+@utility base-text {
+	@apply font-light text-base md:text-lg;
+}
+
+@utility main-text {
+	@apply font-bold text-cta text-center;
+}
+@utility error-text {
+	@apply font-bold text-err text-center p-5;
+}
+
+@layer base {
+	body {
+		@apply overflow-x-hidden
+		bg-d0
+		text-dark
+		base-text;
+	}
+
+	h1 {
+		@apply title-text;
+	}
+	h2 {
+		@apply subtitle-text;
+	}
+}
+
+@utility page {
+	@apply flex gap-5;
+}
+@utility page-grid {
+	@apply grid auto-rows-fr grid-cols-12;
+}
+@utility page-col {
+	@apply flex-col items-center justify-start;
+}
+@utility page-row {
+	@apply flex-row items-start justify-center;
+}
+
+@utility side-by-side {
+	@apply w-full flex flex-row items-center justify-between;
+}
+
+@layer components {
+	.link {
+		@apply font-bold
+		border-b-2 border-transparent
+		transition-std
+		hover:text-cta hover:border-cta;
+	}
+	.std-btn {
+		@apply p-3
+		flex items-center justify-center
+		transition-std important-text
+		rounded-lg
+		border-2 border-dark;
+
+		&:hover {
+			@apply text-light
+			border-cta bg-cta;
+		}
+
+		&:disabled {
+			@apply text-light border-disabled bg-disabled;
+			&:hover {
+				@apply text-light border-disabled bg-disabled;
+			}
+		}
+	}
+	.price-tag {
+		@apply pl-5 pr-10 py-3
+		text-light important-text
+		bg-cta rounded-lg
+		transition-std hover:-rotate-5;
+		clip-path: polygon(0% 0%, 65% 0%, 100% 50%, 65% 100%, 0 100%);
+	}
+	.inverted-price-tag {
+		@apply pr-5 pl-10 py-3
+		text-light important-text
+		bg-cta rounded-lg
+		transition-std hover:rotate-5;
+		clip-path: polygon(0% 50%, 35% 0%, 100% 0%, 100% 100%, 35% 100%);
+	}
+
+	.form {
+		@apply page page-col gap-1 p-5 bg-d1 rounded-xl;
+	}
+}
