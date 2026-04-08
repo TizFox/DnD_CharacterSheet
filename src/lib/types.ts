@@ -2,45 +2,69 @@ export type Alignments = {
 	morality: "good" | "neutral" | "evil";
 	order: "lawful" | "neutral" | "chaotic";
 };
+type coins = "cp" | "sp" | "ep" | "gp" | "pp";
 
-type BaseAbility = {
+export type PossibleAbilities =
+	| "strength"
+	| "dexterity"
+	| "constitution"
+	| "intelligence"
+	| "wisdom"
+	| "charisma";
+export const ALL_ABILITIES: PossibleAbilities[] = [
+	"strength",
+	"dexterity",
+	"constitution",
+	"intelligence",
+	"wisdom",
+	"charisma",
+];
+type Ability<T extends string> = {
 	value: number;
 	proficiency: boolean; // => +proficiencyBonus
+	skills: Record<T, Skill>;
 };
-type Ability<T extends string = never> = [T] extends [never]
-	? BaseAbility
-	: BaseAbility & { skills: Record<T, Skill> };
 
-type StrengthSkills = "athletics";
-type DexteritySkills = "acrobatics" | "sleightOfHand" | "stealth";
-type ConstitutionSkills = "";
-type IntelligenceSkills =
-	| "arcana"
-	| "history"
-	| "investigation"
-	| "nature"
-	| "religion";
-type WisdomSkills =
-	| "animalHandling"
-	| "insight"
-	| "medicine"
-	| "perception"
-	| "survival";
-type CharismaSkills =
-	| "deception"
-	| "intimidation"
-	| "performance"
-	| "persuasion";
+export type PossibleSkills = {
+	strength: "athletics";
+	dexterity: "acrobatics" | "sleight_of_hand" | "stealth";
+	constitution: never;
+	intelligence:
+		| "arcana"
+		| "history"
+		| "investigation"
+		| "nature"
+		| "religion";
+	wisdom:
+		| "animal_handling"
+		| "insight"
+		| "medicine"
+		| "perception"
+		| "survival";
+	charisma: "deception" | "intimidation" | "performance" | "persuasion";
+};
+export const ALL_SKILLS: { [ab in PossibleAbilities]: PossibleSkills[ab][] } = {
+	strength: ["athletics"],
+	dexterity: ["acrobatics", "sleight_of_hand", "stealth"],
+	constitution: [],
+	intelligence: ["arcana", "history", "investigation", "nature", "religion"],
+	wisdom: [
+		"animal_handling",
+		"insight",
+		"medicine",
+		"perception",
+		"survival",
+	],
+	charisma: ["deception", "intimidation", "performance", "persuasion"],
+};
 type Skill = {
 	proficiency: boolean; // => +proficiencyBonus
 	expertise: boolean; // => +proficiencyBonus (again)
 };
 
-export type Weapon = {};
-export type Spell = {};
-
-export type Character = {
+export interface Character {
 	metadata: {
+		fileName: string;
 		player: string;
 		name: string;
 		background: string;
@@ -60,14 +84,12 @@ export type Character = {
 	proficiencyBonus: number;
 	ca: number;
 
-	stats: {
-		strength: Ability<StrengthSkills>;
-		dexterity: Ability<DexteritySkills>;
-		constitution: Ability;
-		intelligence: Ability<IntelligenceSkills>;
-		wisdom: Ability<WisdomSkills>;
-		charisma: Ability<CharismaSkills>;
-		passiveWisdom: number; // 10 + modWis + (wisdom.skills.perception ? proficiencyBonus : 0)
+	stats: { [ab in PossibleAbilities]: Ability<PossibleSkills[ab]> };
+
+	hp: {
+		current: number;
+		max: number;
+		temp: number;
 	};
 
 	features: {
@@ -78,15 +100,13 @@ export type Character = {
 	};
 
 	equipment: {
-		coins: {
-			cp: number;
-			sp: number;
-			ep: number;
-			gp: number;
-			pp: number;
-		};
-		body: string;
+		coins: { [key in coins]: number };
+		inventory: string;
+		weapons: Weapon[];
 	};
 
-	spells: {};
-};
+	spells: Spell[];
+}
+
+export interface Weapon {}
+export interface Spell {}

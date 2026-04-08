@@ -57,28 +57,15 @@
 	}
 
 	h1 {
-		@apply title-text;
+		@apply title-text font-mono;
 	}
 	h2 {
-		@apply subtitle-text;
+		@apply subtitle-text font-mono;
 	}
-}
 
-@utility page {
-	@apply flex gap-5;
-}
-@utility page-grid {
-	@apply grid auto-rows-fr grid-cols-12;
-}
-@utility page-col {
-	@apply flex-col items-center justify-start;
-}
-@utility page-row {
-	@apply flex-row items-start justify-center;
-}
-
-@utility side-by-side {
-	@apply w-full flex flex-row items-center justify-between;
+	hr {
+		@apply w-full border-dark;
+	}
 }
 
 @layer components {
@@ -107,22 +94,17 @@
 			}
 		}
 	}
-	.price-tag {
-		@apply pl-5 pr-10 py-3
-		text-light important-text
-		bg-cta rounded-lg
-		transition-std hover:-rotate-5;
-		clip-path: polygon(0% 0%, 65% 0%, 100% 50%, 65% 100%, 0 100%);
-	}
-	.inverted-price-tag {
-		@apply pr-5 pl-10 py-3
-		text-light important-text
-		bg-cta rounded-lg
-		transition-std hover:rotate-5;
-		clip-path: polygon(0% 50%, 35% 0%, 100% 0%, 100% 100%, 35% 100%);
+}
+
+@layer utility {
+	.no-spinner::-webkit-inner-spin-button,
+	.no-spinner::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 
-	.form {
-		@apply page page-col gap-1 p-5 bg-d1 rounded-xl;
+	.no-spinner {
+		-moz-appearance: textfield; /* Per Firefox */
+		appearance: textfield;
 	}
 }

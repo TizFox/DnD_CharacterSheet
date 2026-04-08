@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { FileUser } from "@lucide/svelte";
 
 	import { FILE_EXTENTION } from "$lib/fileHandler";
@@ -13,6 +13,9 @@
 	$effect(() => {
 		handle = {
 			clear: () => {
+				if (!fileInput) {
+					return;
+				}
 				fileInput.value = "";
 				fileName = null;
 				onInput(null);
@@ -20,8 +23,8 @@
 		};
 	});
 
-	let fileInput = $state(null);
-	let fileName = $state(null);
+	let fileInput = $state<HTMLInputElement | null>(null);
+	let fileName = $state<string | null>(null);
 </script>
 
 <!------------------------------------------>
@@ -45,9 +48,11 @@
 	</button>
 	<input
 		bind:this={fileInput}
-		oninput={(e) => {
-			fileName = e.target.files[0].name;
-			onInput(e.target.files[0]);
+		oninput={() => {
+			if (fileInput?.files && fileInput.files.length > 0) {
+				fileName = fileInput.files[0].name;
+				onInput(fileInput.files[0]);
+			}
 		}}
 		class="hidden"
 		type="file"
@@ -59,5 +64,4 @@
 <!------------------------------------------>
 
 <style lang="postcss">
-	@import "$lib/theme.css";
 </style>

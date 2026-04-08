@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "fileName": "char1",
+    "player": "Tiz",
+    "name": "Oltrid",
+    "background": "",
+    "alignment": {
+      "morality": "neutral",
+      "order": "neutral"
+    },
+    "personalityTraits": "",
+    "ideals": "",
+    "bonds": "",
+    "flaws": ""
+  },
+  "class": "Guerriero",
+  "race": "Umano Variante",
+  "speed": 9,
+  "initiative": 2,
+  "level": 15,
+  "proficiencyBonus": 5,
+  "ca": 19,
+  "stats": {
+    "strength": {
+      "value": 20,
+      "proficiency": true,
+      "skills": {
+        "athletics": {
+          "proficiency": true,
+          "expertise": false
+        }
+      }
+    },
+    "dexterity": {
+      "value": 14,
+      "proficiency": false,
+      "skills": {
+        "acrobatics": {
+          "proficiency": true,
+          "expertise": false
+        },
+        "sleight_of_hand": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "stealth": {
+          "proficiency": false,
+          "expertise": false
+        }
+      }
+    },
+    "constitution": {
+      "value": 20,
+      "proficiency": true,
+      "skills": {}
+    },
+    "intelligence": {
+      "value": 10,
+      "proficiency": false,
+      "skills": {
+        "arcana": {
+          "proficiency": true,
+          "expertise": true
+        },
+        "history": {
+          "proficiency": true,
+          "expertise": true
+        },
+        "investigation": {
+          "proficiency": true,
+          "expertise": true
+        },
+        "nature": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "religion": {
+          "proficiency": false,
+          "expertise": false
+        }
+      }
+    },
+    "wisdom": {
+      "value": 14,
+      "proficiency": false,
+      "skills": {
+        "animal_Handling": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "insight": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "medicine": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "perception": {
+          "proficiency": true,
+          "expertise": false
+        },
+        "survival": {
+          "proficiency": true,
+          "expertise": false
+        }
+      }
+    },
+    "charisma": {
+      "value": 8,
+      "proficiency": false,
+      "skills": {
+        "deception": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "intimidation": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "performance": {
+          "proficiency": false,
+          "expertise": false
+        },
+        "persuasion": {
+          "proficiency": false,
+          "expertise": false
+        }
+      }
+    }
+  },
+  "hp": {
+    "current": 166,
+    "max": 166,
+    "temp": 0
+  },
+  "features": {
+    "proficiencies": "Tutte le Armature, tutte le Armi, Scudi.<br>No Attrezzi",
+    "languages": "Comune",
+    "raceTraits": "...",
+    "classTraits": "..."
+  },
+  "equipment": {
+    "coins": {
+      "cp": 0,
+      "sp": 0,
+      "ep": 0,
+      "gp": 130,
+      "pp": 0
+    },
+    "inventory": "",
+    "weapons": []
+  },
+  "spells": []
+}
